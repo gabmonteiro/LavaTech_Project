@@ -16,7 +16,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
     }
     
     public void atualizaTabela() {
-        ArrayList<Veiculo> lista = Principal.ccont.listarVeiculos();
+        ArrayList<Veiculo> lista = Principal.ccont.listarVeiculosPorCliente(clienteId);
         VeiculoTableModel veiculoTableModel = new VeiculoTableModel(lista);
         jTableVeiculos.setModel(veiculoTableModel);
     }
@@ -34,7 +34,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
         jBtnVoltar1 = new javax.swing.JButton();
         jBtnAdicionar2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTableVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,6 +143,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVeiculosMouseClicked

@@ -113,6 +113,10 @@ public class TrataClienteController extends Thread {
                         case "listarVeiculos":
                             out.writeObject(veiculoDAO.findAll());
                             break;
+                        case "listarVeiculosPorCliente":
+                            Integer clientId = (Integer) in.readObject();
+                            out.writeObject(veiculoDAO.findByCliente(clientId));
+                            break;
 
                         // -------- FUNCIONARIO --------
                         case "inserirFuncionario":

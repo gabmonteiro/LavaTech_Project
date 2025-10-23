@@ -32,7 +32,7 @@ public class TelaListaAgendamentos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAgendamentos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
@@ -159,6 +159,7 @@ public class TelaListaAgendamentos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed
