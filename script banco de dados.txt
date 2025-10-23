@@ -1,0 +1,96 @@
+CREATE DATABASE lavatechdb;
+
+-- Selecionando o banco de dados
+USE lavatechdb;
+
+
+CREATE TABLE Cliente (
+    id INT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Veiculo (
+    id INT PRIMARY KEY,
+    placa VARCHAR(10) NOT NULL,
+    marca VARCHAR(50) NOT NULL,
+    modelo VARCHAR(50) NOT NULL,
+    cor VARCHAR(20) NOT NULL,
+    ano INT NOT NULL,
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
+);
+
+CREATE TABLE Funcionario (
+    id INT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cargo VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Usuario (
+    id INT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senhaHash VARCHAR(255) NOT NULL,
+    isAdmin BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE Servico (
+    id INT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    preco FLOAT NOT NULL,
+    duracaoEstimadaMin INT NOT NULL
+);
+
+CREATE TABLE Agendamento (
+    id INT PRIMARY KEY,
+    dataHora DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    cliente_id INT,
+    veiculo_id INT,
+    funcionario_id INT,
+    servico_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id),
+    FOREIGN KEY (veiculo_id) REFERENCES Veiculo(id),
+    FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id),
+    FOREIGN KEY (servico_id) REFERENCES Servico(id)
+);
+
+
+-- Inserindo dados na tabela Cliente
+INSERT INTO Cliente (id, nome, telefone) VALUES
+(1, 'Julio Ferreira', '(51) 91234-5678'),
+(2, 'Gabriel dos Santos', '(21) 98765-4321'),
+(3, 'Pedro Gabriel', '(31) 99876-5432');
+
+-- Inserindo dados na tabela Veiculo
+INSERT INTO Veiculo (id, placa, marca, modelo, cor, ano, cliente_id) VALUES
+(1, 'ABC-1234', 'Fiat', 'Palio', 'Preto', 2018, 1),
+(2, 'XYZ-5678', 'Volkswagen', 'Gol', 'Branco', 2020, 2),
+(3, 'JKL-9101', 'Chevrolet', 'Onix', 'Azul', 2022, 3);
+
+-- Inserindo dados na tabela Funcionario
+INSERT INTO Funcionario (id, nome, cargo) VALUES
+(1, 'Carla Pinheiro', 'Atendente'),
+(2, 'Fernando Vieira', 'Técnico'),
+(3, 'Kaio Silva', 'Gerente');
+
+-- Inserindo dados na tabela Usuario
+INSERT INTO Usuario (id, nome, email, senhaHash, isAdmin) VALUES
+(1, 'admin', 'admin@lavatech.com', 'hashedsenha123', false),
+(2, 'Gabriel Monteiro', 'gabriel@lavatech.com', 'hashedsenha123', false),
+(3, 'Pedro França', 'pedro@lavatech.com', 'hashedsenha123', false),
+(4, 'Admin Principal', 'admin.principal@lavatech.com', 'adminhashed123', true);
+
+-- Inserindo dados na tabela Servico
+INSERT INTO Servico (id, nome, descricao, preco, duracaoEstimadaMin) VALUES
+(1, 'Lavagem Completa', 'Lavagem externa e interna do veículo.', 50.00, 60),
+(2, 'Polimento', 'Polimento da pintura do veículo para remoção de riscos.', 100.00, 90),
+(3, 'Troca de Óleo', 'Troca do óleo do motor do veículo.', 150.00, 30);
+
+-- Inserindo dados na tabela Agendamento
+INSERT INTO Agendamento (id, dataHora, status, cliente_id, veiculo_id, funcionario_id, servico_id) VALUES
+(1, '2025-10-02 10:00:00', 'Agendado', 1, 1, 1, 1),
+(2, '2025-10-03 14:00:00', 'Agendado', 2, 2, 2, 2),
+(3, '2025-10-04 09:30:00', 'Agendado', 3, 3, 3, 3);
