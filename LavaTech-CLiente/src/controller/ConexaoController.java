@@ -213,4 +213,15 @@ public class ConexaoController {
             return null;
         }
     }
+    
+        private Object requisitarListaVeiculos(String operacao, int clienteId) {
+        try {
+            out.writeObject(operacao);
+            out.flush();
+            return in.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
