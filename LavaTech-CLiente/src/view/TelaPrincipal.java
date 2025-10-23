@@ -41,8 +41,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jBtnAgendamentos.setText("Agendamentos");
+        jBtnAgendamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgendamentosActionPerformed(evt);
+            }
+        });
 
         jBtnUsuarios.setText("Usuários");
+        jBtnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnUsuariosActionPerformed(evt);
+            }
+        });
 
         jBtnSair.setText("Sair");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -90,14 +100,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jBtnServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnServicosActionPerformed
-        TelaConsultaServico telaServico = new TelaConsultaServico();
-        telaServico.setVisible(true);
+        TelaListaServicos telaServicos = new TelaListaServicos();
+        telaServicos.setVisible(true);
     }//GEN-LAST:event_jBtnServicosActionPerformed
         
     private void botaoFuncionáriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFuncionáriosActionPerformed
-        TelaConsultaPet telaPet = new TelaConsultaPet();
-        telaPet.setVisible(true);
+        TelaListaFuncionarios telaFuncionarios = new TelaListaFuncionarios();
+        telaFuncionarios.setVisible(true);
     }//GEN-LAST:event_botaoFuncionáriosActionPerformed
+
+    private void jBtnAgendamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgendamentosActionPerformed
+        TelaListaAgendamentos telaAgendamentos = new TelaListaAgendamentos();
+        telaAgendamentos.setVisible(true);
+    }//GEN-LAST:event_jBtnAgendamentosActionPerformed
+
+    private void jBtnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUsuariosActionPerformed
+        TelaListaUsuarios telaUsuarios = new TelaListaUsuarios();
+        telaUsuarios.setVisible(true);
+    }//GEN-LAST:event_jBtnUsuariosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoFuncionários;
