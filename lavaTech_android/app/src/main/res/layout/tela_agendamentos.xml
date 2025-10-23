@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgendamentosActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Agendamento"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDateLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp" android:text="Selecione a Data:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="DD/MM/AAAA"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
+        android:minHeight="48dp"
+        android:drawableEnd="@android:drawable/ic_menu_today"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateLabel"
+        android:autofillHints="date" />
+
+    <TextView
+        android:id="@+id/textViewTimeLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Selecione a Hora:"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="HH:MM"
+        android:inputType="time"
+        android:focusable="false"
+        android:clickable="true"
+        android:minHeight="48dp"
+        android:drawableEnd="@android:drawable/ic_lock_idle_alarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeLabel"
+        android:autofillHints="time" /> <TextView
+    android:id="@+id/textViewServiceLabel"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="Escolha o Serviço:"
+    android:layout_marginTop="16dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+    <Spinner
+        android:id="@+id/spinnerServiceType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/car_wash_services"
+        android:minHeight="48dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewServiceLabel" />
+
+    <Button
+        android:id="@+id/buttonConfirmSchedule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Agendamento"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:backgroundTint="#00BFFF"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

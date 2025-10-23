@@ -1,0 +1,10 @@
+<resources>
+<string-array name="car_wash_services">
+    <item>Lavagem Simples</item>
+    <item>Lavagem Completa (Interna e Externa)</item>
+    <item>Lavagem com Cera</item>
+    <item>Higienização Interna</item>
+    <item>Polimento e Cristalização</item>
+</string-array>
+
+</resources>
