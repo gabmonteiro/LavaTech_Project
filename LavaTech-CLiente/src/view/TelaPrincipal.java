@@ -10,7 +10,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         userLogado = Principal.ccont.getUserLogado();
         if (!userLogado.getIsAdmin()){
-            jBtnUsuarios.setVisible(false);
+            jBtnClientes.setVisible(false);
         }
     }
 
@@ -21,8 +21,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jBtnServicos = new javax.swing.JButton();
         botaoFuncionários = new javax.swing.JButton();
         jBtnAgendamentos = new javax.swing.JButton();
-        jBtnUsuarios = new javax.swing.JButton();
+        jBtnClientes = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
+        jBtnUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,10 +48,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jBtnUsuarios.setText("Usuários");
-        jBtnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        jBtnClientes.setText("Clientes");
+        jBtnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnUsuariosActionPerformed(evt);
+                jBtnClientesActionPerformed(evt);
             }
         });
 
@@ -58,6 +59,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
+            }
+        });
+
+        jBtnUsuarios.setText("Usuários");
+        jBtnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnUsuariosActionPerformed(evt);
             }
         });
 
@@ -71,8 +79,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jBtnServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoFuncionários, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addComponent(jBtnAgendamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                    .addComponent(jBtnUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                    .addComponent(jBtnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+                    .addComponent(jBtnClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(jBtnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(jBtnUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -87,8 +96,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jBtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -114,6 +125,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaAgendamentos.setVisible(true);
     }//GEN-LAST:event_jBtnAgendamentosActionPerformed
 
+    private void jBtnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClientesActionPerformed
+        TelaListaClientes telaClientes = new TelaListaClientes();
+        telaClientes.setVisible(true);
+    }//GEN-LAST:event_jBtnClientesActionPerformed
+
     private void jBtnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUsuariosActionPerformed
         TelaListaUsuarios telaUsuarios = new TelaListaUsuarios();
         telaUsuarios.setVisible(true);
@@ -122,6 +138,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoFuncionários;
     private javax.swing.JButton jBtnAgendamentos;
+    private javax.swing.JButton jBtnClientes;
     private javax.swing.JButton jBtnSair;
     private javax.swing.JButton jBtnServicos;
     private javax.swing.JButton jBtnUsuarios;

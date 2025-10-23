@@ -29,8 +29,9 @@
                   <Component id="jBtnServicos" alignment="0" max="32767" attributes="0"/>
                   <Component id="botaoFuncionários" alignment="1" pref="301" max="32767" attributes="0"/>
                   <Component id="jBtnAgendamentos" alignment="0" pref="301" max="32767" attributes="0"/>
-                  <Component id="jBtnUsuarios" alignment="1" pref="301" max="32767" attributes="0"/>
+                  <Component id="jBtnClientes" alignment="1" pref="301" max="32767" attributes="0"/>
                   <Component id="jBtnSair" alignment="0" pref="301" max="32767" attributes="0"/>
+                  <Component id="jBtnUsuarios" alignment="1" pref="301" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -48,8 +49,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jBtnUsuarios" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jBtnClientes" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
               <Component id="jBtnSair" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,12 +82,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAgendamentosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnUsuarios">
+    <Component class="javax.swing.JButton" name="jBtnClientes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
+        <Property name="text" type="java.lang.String" value="Clientes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnUsuariosActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnClientesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnSair">
@@ -93,6 +96,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSairActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnUsuarios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnUsuariosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
