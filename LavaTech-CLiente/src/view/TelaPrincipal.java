@@ -132,7 +132,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnClientesActionPerformed
 
     private void jBtnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUsuariosActionPerformed
-        TelaListaUsuarios telaUsuarios = new TelaListaUsuarios();
+        TelaListaUsuarios telaUsuarios = new TelaListaUsuarios(userLogado);
         telaUsuarios.setVisible(true);
     }//GEN-LAST:event_jBtnUsuariosActionPerformed
 

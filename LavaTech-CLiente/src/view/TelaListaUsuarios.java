@@ -6,10 +6,13 @@ import modelDominio.Usuario;
 import view.tablemodel.UsuarioTableModel;
 
 public class TelaListaUsuarios extends javax.swing.JFrame {
+    
+    private Usuario userLogado;
 
-    public TelaListaUsuarios() {
+    public TelaListaUsuarios(Usuario usrLogado) {
         initComponents();
         atualizaTabela();
+        this.userLogado = usrLogado;
     }
     
     public void atualizaTabela() {
@@ -156,9 +159,9 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             UsuarioTableModel model = (UsuarioTableModel) jTableUsuarios.getModel();
             Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
 
-            // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-            //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-            //telaAtUsuario.setVisible(true);
+            // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
+            TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado);
+            telaCriarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_jTableUsuariosMouseClicked
 
@@ -177,17 +180,17 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         // Pegando o modelo da tabela
         UsuarioTableModel model = (UsuarioTableModel) jTableUsuarios.getModel();
         Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
-
-        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        
+        // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado);
+        telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         int linhaSelecionada = jTableUsuarios.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um usuario para atualizar.");
+            JOptionPane.showMessageDialog(this, "Selecione um usuario para excluir.");
             return;
         }
 
@@ -208,9 +211,9 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnVoltar1ActionPerformed
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
-        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        // Chamando a tela de criar
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado);
+        telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
