@@ -1,5 +1,11 @@
 package view;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelDominio.Usuario;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -101,25 +107,44 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
-        // lendo os campos da tela e guardando em variaveis
-        String email = jTextEmail.getText();
-        String senha = new String(jTextSenha.getPassword());
-        // chamar o metodo para verificar se o usuario existe no banco
-        Usuario userLogado = Principal.ccont.login(email, senha);
-        if (userLogado != null){
-            //o usuario existe
-            Principal.ccont.setUserLogado(userLogado);
-            // chamar a tela principal do sistema
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
-            telaPrincipal.setVisible(true);
-            // fechando a tela de login
-            dispose();
-        }else{
-            // o usuario nao existe
-            jLblAviso.setVisible(true);
+        try {
+            // Lendo os campos da tela
+            String email = jTextEmail.getText();
+            String senha = new String(jTextSenha.getPassword());
+
+            // Criptografando a senha digitada (mesmo algoritmo do cadastro)
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] messageDigest = md.digest(senha.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : messageDigest) {
+                sb.append(String.format("%02x", 0xFF & b));
+            }
+            String senhaHash = sb.toString();
+
+            // Chamando o método de login com a senha criptografada
+            Usuario userLogado = Principal.ccont.login(email, senhaHash);
+
+            if (userLogado != null) {
+                // Usuário existe
+                Principal.ccont.setUserLogado(userLogado);
+
+                // Abre a tela principal
+                TelaPrincipal telaPrincipal = new TelaPrincipal();
+                telaPrincipal.setVisible(true);
+
+                // Fecha a tela de login
+                dispose();
+            } else {
+                // Usuário não encontrado
+                jLblAviso.setVisible(true);
+            }
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao criptografar senha: " + e.getMessage());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }//GEN-LAST:event_jBtnEntrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

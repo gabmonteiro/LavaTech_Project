@@ -1,5 +1,9 @@
 package view;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.swing.JOptionPane;
 import modelDominio.Usuario;
 
 public class TelaCriarUsuario extends javax.swing.JFrame {
@@ -75,8 +79,6 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Senha:");
 
-        senhaField.setText("jPasswordField1");
-
         checkBoxAdmin.setText("É administrador?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,22 +142,36 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnVoltar1ActionPerformed
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
-        Usuario userEnviado;
-        String senha = new String(senhaField.getPassword());
-        if(user != null) {
-            userEnviado = new Usuario(user.getId(),
-                    nomeField.getText(),
-                    emailField.getText(),
-                    senha,
-                    checkBoxAdmin.isSelected());
-        } else {
-            userEnviado = new Usuario(nomeField.getText(),
-                    emailField.getText(),
-                    senha,
-                    checkBoxAdmin.isSelected());
-        }
+        try {
+            Usuario userEnviado;
+            String senha = new String(senhaField.getPassword());
         
-        Principal
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte messageDigest[ ] = md.digest(senha.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for(byte b: messageDigest){
+            sb.append(String.format("%02x",0xFF & b));
+            }
+            String senhaMax = sb.toString();
+
+            if(user != null) {
+                userEnviado = new Usuario(user.getId(),
+                        nomeField.getText(),
+                        emailField.getText(),
+                        senhaMax,
+                        checkBoxAdmin.isSelected());
+            } else {
+                userEnviado = new Usuario(nomeField.getText(),
+                        emailField.getText(),
+                        senhaMax,
+                        checkBoxAdmin.isSelected());
+            }
+
+            Principal.ccont.inserirUsuario(userEnviado);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao criptografar senha: " + e.getMessage());
+        }
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

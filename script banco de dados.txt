@@ -5,13 +5,13 @@ USE lavatechdb;
 
 
 CREATE TABLE Cliente (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Veiculo (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     placa VARCHAR(10) NOT NULL,
     marca VARCHAR(50) NOT NULL,
     modelo VARCHAR(50) NOT NULL,
@@ -22,21 +22,21 @@ CREATE TABLE Veiculo (
 );
 
 CREATE TABLE Funcionario (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     cargo VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Usuario (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    senhaHash VARCHAR(255) NOT NULL,
+    senhaHash VARCHAR(260) NOT NULL,
     isAdmin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Servico (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     descricao TEXT,
     preco FLOAT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE Servico (
 );
 
 CREATE TABLE Agendamento (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     dataHora DATETIME NOT NULL,
     status VARCHAR(50) NOT NULL,
     cliente_id INT,
@@ -77,11 +77,19 @@ INSERT INTO Funcionario (id, nome, cargo) VALUES
 (3, 'Kaio Silva', 'Gerente');
 
 -- Inserindo dados na tabela Usuario
+-- As senhas foram convertidas para SHA-256
+-- Senhas originais (para desenvolvedores):
+-- 1 → admin@lavatech.com → senha: admin
+-- 2 → gabriel@lavatech.com → senha: senha123
+-- 3 → pedro@lavatech.com → senha: senha123
+-- 4 → admin.principal@lavatech.com → senha: admin123
+
 INSERT INTO Usuario (id, nome, email, senhaHash, isAdmin) VALUES
-(1, 'admin', 'admin@lavatech.com', 'hashedsenha123', false),
-(2, 'Gabriel Monteiro', 'gabriel@lavatech.com', 'hashedsenha123', false),
-(3, 'Pedro França', 'pedro@lavatech.com', 'hashedsenha123', false),
-(4, 'Admin Principal', 'admin.principal@lavatech.com', 'adminhashed123', true);
+(1, 'admin', 'admin@lavatech.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', true),
+(2, 'Gabriel Monteiro', 'gabriel@lavatech.com', 'd404559f602eab6fd602c8386c3f07a6d7a3e4f2f3d6a8a0f4b2e6a8e6f7b1e7', false),
+(3, 'Pedro França', 'pedro@lavatech.com', 'd404559f602eab6fd602c8386c3f07a6d7a3e4f2f3d6a8a0f4b2e6a8e6f7b1e7', false),
+(4, 'Admin Principal', 'admin.principal@lavatech.com', '0192023a7bbd73250516f069df18b500c8b1e0e985e6b1e1b6db1bcb0d3a1a3c', true);
+
 
 -- Inserindo dados na tabela Servico
 INSERT INTO Servico (id, nome, descricao, preco, duracaoEstimadaMin) VALUES
