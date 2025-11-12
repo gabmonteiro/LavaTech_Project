@@ -2,21 +2,22 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelDominio.Cliente;
 import modelDominio.Veiculo;
 import view.tablemodel.VeiculoTableModel;
 
 public class TelaListaVeiculos extends javax.swing.JFrame {
     
-    private int clienteId;
+    private Cliente cliente;
 
-    public TelaListaVeiculos(int clienteId) {
-        this.clienteId = clienteId;
+    public TelaListaVeiculos(Cliente cliente) {
+        this.cliente = cliente;
         initComponents();
         atualizaTabela();
     }
     
     public void atualizaTabela() {
-        ArrayList<Veiculo> lista = Principal.ccont.listarVeiculosPorCliente(clienteId);
+        ArrayList<Veiculo> lista = Principal.ccont.listarVeiculosPorCliente(cliente.getId());
         VeiculoTableModel veiculoTableModel = new VeiculoTableModel(lista);
         jTableVeiculos.setModel(veiculoTableModel);
     }
@@ -54,7 +55,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableVeiculos);
 
-        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
+        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/refresh.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
         jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +63,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/edit.png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +71,7 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/delete.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,8 +161,8 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
             Veiculo  veiculoSelecionado = model.getVeiculo(linhaSelecionada);
 
             // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-            //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-            //telaAtUsuario.setVisible(true);
+            TelaCriarVeiculo telaAtVeiculo = new TelaCriarVeiculo(cliente, veiculoSelecionado, this);
+            telaAtVeiculo.setVisible(true);
         }
     }//GEN-LAST:event_jTableVeiculosMouseClicked
 
@@ -181,9 +182,9 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
             VeiculoTableModel model = ( VeiculoTableModel) jTableVeiculos.getModel();
             Veiculo  veiculoSelecionado = model.getVeiculo(linhaSelecionada);
 
-        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
+        TelaCriarVeiculo telaAtVeiculo = new TelaCriarVeiculo(cliente, veiculoSelecionado, this);
+        telaAtVeiculo.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -212,8 +213,8 @@ public class TelaListaVeiculos extends javax.swing.JFrame {
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        TelaCriarVeiculo telaAtVeiculo = new TelaCriarVeiculo(cliente, this);
+        telaAtVeiculo.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,16 +10,19 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
     
     private Usuario user;
     private Usuario userLogado;
+    private TelaListaUsuarios telaLista;
 
-    public TelaCriarUsuario(Usuario userLogado) {
+    public TelaCriarUsuario(Usuario userLogado, TelaListaUsuarios telaLista) {
         initComponents();
         this.userLogado = userLogado;
+        this.telaLista = telaLista;
         setVisibleAdmin();
     }
     
-    public TelaCriarUsuario(Usuario userLogado, Usuario user) {
+    public TelaCriarUsuario(Usuario userLogado, Usuario user, TelaListaUsuarios telaLista) {
         initComponents();
         this.userLogado = userLogado;
+        this.telaLista = telaLista;
         setVisibleAdmin();
         //populando campos com usr edit
         this.user = user;
@@ -29,7 +32,6 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
     public void preencheForm() {
         nomeField.setText(user.getNome());
         emailField.setText(user.getEmail());
-        senhaField.setText(user.getSenhaHash());
         if(userLogado.getIsAdmin()) {
            checkBoxAdmin.setSelected(user.getIsAdmin());
         }
@@ -66,7 +68,7 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
         });
 
         jBtnAdicionar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
-        jBtnAdicionar2.setText("Adicionar");
+        jBtnAdicionar2.setText("Concluir");
         jBtnAdicionar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAdicionar2ActionPerformed(evt);
@@ -85,12 +87,6 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addComponent(jBtnVoltar1)
-                .addGap(59, 59, 59)
-                .addComponent(jBtnAdicionar2)
-                .addGap(128, 128, 128))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -106,8 +102,13 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
                             .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(195, 195, 195)
-                        .addComponent(checkBoxAdmin)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(checkBoxAdmin))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jBtnVoltar1)
+                        .addGap(59, 59, 59)
+                        .addComponent(jBtnAdicionar2)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,6 +145,7 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
         try {
             Usuario userEnviado;
+            boolean resposta;
             String senha = new String(senhaField.getPassword());
         
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -160,14 +162,22 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
                         emailField.getText(),
                         senhaMax,
                         checkBoxAdmin.isSelected());
+                resposta = Principal.ccont.atualizarUsuario(userEnviado);
             } else {
                 userEnviado = new Usuario(nomeField.getText(),
                         emailField.getText(),
                         senhaMax,
                         checkBoxAdmin.isSelected());
+                resposta = Principal.ccont.inserirUsuario(userEnviado);
             }
 
-            Principal.ccont.inserirUsuario(userEnviado);
+            if(resposta) {
+                JOptionPane.showMessageDialog(null, "Usuário criado/editado com sucesso!");
+                telaLista.atualizaTabela();
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário não criado/editado!");
+            }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao criptografar senha: " + e.getMessage());

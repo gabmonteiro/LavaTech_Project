@@ -33,7 +33,7 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
+        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/refresh.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
         jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,7 +41,7 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/edit.png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,7 +49,7 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/delete.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,8 +160,8 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
         Funcionario funcionarioSelecionado = model.getFuncionario(linhaSelecionada);
 
         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        TelaCriarFuncionario telaAtFuncionario = new TelaCriarFuncionario(funcionarioSelecionado, this);
+        telaAtFuncionario.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -177,9 +177,9 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
         Funcionario funcionarioSelecionado = model.getFuncionario(linhaSelecionada);
 
         if(Principal.ccont.excluirFuncionario(funcionarioSelecionado.getId())) {
-            JOptionPane.showMessageDialog(this, "Serviço removido!");
+            JOptionPane.showMessageDialog(this, "Funcionario removido!");
         } else {
-            JOptionPane.showMessageDialog(this, "Serviço não removido! Esse serviço está agendado.");
+            JOptionPane.showMessageDialog(this, "Funcionario não removido! Esse funcionario está vinculado a um serviço/agendamento.");
         }
         atualizaTabela();
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -190,8 +190,8 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        TelaCriarFuncionario telaAtFuncionario = new TelaCriarFuncionario(this);
+        telaAtFuncionario.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     private void jTableFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFuncionariosMouseClicked
@@ -208,8 +208,8 @@ public class TelaListaFuncionarios extends javax.swing.JFrame {
             Funcionario funcionarioSelecionado = model.getFuncionario(linhaSelecionada);
 
             // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-            //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-            //telaAtUsuario.setVisible(true);
+            TelaCriarFuncionario telaAtFuncionario = new TelaCriarFuncionario(funcionarioSelecionado, this);
+            telaAtFuncionario.setVisible(true);
         }
     }//GEN-LAST:event_jTableFuncionariosMouseClicked
 

@@ -34,7 +34,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
+        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/refresh.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
         jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,7 +42,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/edit.png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,7 +50,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/delete.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +141,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +172,8 @@ public class TelaListaClientes extends javax.swing.JFrame {
         Cliente  clienteSelecionado = model.getCliente(linhaSelecionada);
 
         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        TelaCriarCliente telaAtCliente = new TelaCriarCliente(clienteSelecionado, this);
+        telaAtCliente.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -188,7 +188,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
         ClienteTableModel model = ( ClienteTableModel) jTableClientes.getModel();
         Cliente  clienteSelecionado = model.getCliente(linhaSelecionada);
 
-        if(Principal.ccont.excluirUsuario(clienteSelecionado.getId())) {
+        if(Principal.ccont.excluirCliente(clienteSelecionado.getId())) {
             JOptionPane.showMessageDialog(this, "Cliente removido!");
         } else {
             JOptionPane.showMessageDialog(this, "Cliente não removido!");
@@ -202,8 +202,8 @@ public class TelaListaClientes extends javax.swing.JFrame {
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
         // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        TelaCriarCliente telaAtCliente = new TelaCriarCliente(this);
+        telaAtCliente.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
@@ -219,9 +219,9 @@ public class TelaListaClientes extends javax.swing.JFrame {
         ClienteTableModel model = ( ClienteTableModel) jTableClientes.getModel();
         Cliente  clienteSelecionado = model.getCliente(linhaSelecionada);
 
-            // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-            //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-            //telaAtUsuario.setVisible(true);
+        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
+        TelaCriarCliente telaAtCliente = new TelaCriarCliente(clienteSelecionado, this);
+        telaAtCliente.setVisible(true);
         }
     }//GEN-LAST:event_jTableClientesMouseClicked
 
@@ -237,7 +237,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
         ClienteTableModel model = ( ClienteTableModel) jTableClientes.getModel();
         Cliente  clienteSelecionado = model.getCliente(linhaSelecionada);
         
-        TelaListaVeiculos telaListaVeiculos = new TelaListaVeiculos(clienteSelecionado.getId()); 
+        TelaListaVeiculos telaListaVeiculos = new TelaListaVeiculos(clienteSelecionado); 
         telaListaVeiculos.setVisible(true);
     }//GEN-LAST:event_jBtnVeiculosActionPerformed
 

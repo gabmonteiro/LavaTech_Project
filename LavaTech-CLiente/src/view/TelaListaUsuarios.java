@@ -54,7 +54,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableUsuarios);
 
-        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
+        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/refresh.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
         jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +62,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/edit.png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/delete.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
 
             // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
-            TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado);
+            TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado, this);
             telaCriarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_jTableUsuariosMouseClicked
@@ -182,7 +182,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
         
         // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
-        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado);
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado, this);
         telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
@@ -212,7 +212,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
         // Chamando a tela de criar
-        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado);
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, this);
         telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
