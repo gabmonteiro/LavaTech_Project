@@ -40,10 +40,29 @@ public class AgendamentoDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(a.getDataHora()));
             ps.setString(2, a.getStatus());
-            ps.setInt(3, a.getCliente().getId());
-            ps.setInt(4, a.getVeiculo().getId());
-            ps.setInt(5, a.getFuncionario().getId());
-            ps.setInt(6, a.getServico().getId());
+            
+            // Tratamento para objetos que podem ser null
+            if (a.getCliente() != null) {
+                ps.setInt(3, a.getCliente().getId());
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+            if (a.getVeiculo() != null) {
+                ps.setInt(4, a.getVeiculo().getId());
+            } else {
+                ps.setNull(4, Types.INTEGER);
+            }
+            if (a.getFuncionario() != null) {
+                ps.setInt(5, a.getFuncionario().getId());
+            } else {
+                ps.setNull(5, Types.INTEGER);
+            }
+            if (a.getServico() != null) {
+                ps.setInt(6, a.getServico().getId());
+            } else {
+                ps.setNull(6, Types.INTEGER);
+            }
+            
             ps.setInt(7, a.getId());
             ps.executeUpdate();
         }
@@ -65,10 +84,46 @@ public class AgendamentoDAO {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Cliente cliente = new ClienteDAO().findById(rs.getInt("cliente_id"));
-                    Veiculo veiculo = new VeiculoDAO().findById(rs.getInt("veiculo_id"));
-                    Funcionario funcionario = new FuncionarioDAO().findById(rs.getInt("funcionario_id"));
-                    Servico servico = new ServicoDAO().findById(rs.getInt("servico_id"));
+                    Cliente cliente = null;
+                    Veiculo veiculo = null;
+                    Funcionario funcionario = null;
+                    Servico servico = null;
+                    
+                    try {
+                        int clienteId = rs.getInt("cliente_id");
+                        if (!rs.wasNull()) {
+                            cliente = new ClienteDAO().findById(clienteId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar cliente para agendamento ID " + id + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int veiculoId = rs.getInt("veiculo_id");
+                        if (!rs.wasNull()) {
+                            veiculo = new VeiculoDAO().findById(veiculoId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar veículo para agendamento ID " + id + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int funcionarioId = rs.getInt("funcionario_id");
+                        if (!rs.wasNull()) {
+                            funcionario = new FuncionarioDAO().findById(funcionarioId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar funcionário para agendamento ID " + id + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int servicoId = rs.getInt("servico_id");
+                        if (!rs.wasNull()) {
+                            servico = new ServicoDAO().findById(servicoId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar serviço para agendamento ID " + id + ": " + e.getMessage());
+                    }
 
                     LocalDateTime dt = rs.getTimestamp("dataHora").toLocalDateTime();
 
@@ -89,29 +144,72 @@ public class AgendamentoDAO {
     }
 
     public List<Agendamento> findAll() throws SQLException {
-        String sql = "SELECT * FROM Agendamento";
+        String sql = "SELECT * FROM Agendamento ORDER BY dataHora DESC";
         List<Agendamento> lista = new ArrayList<>();
         try (Connection conn = Conector.getConnection();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
-                Cliente cliente = new ClienteDAO().findById(rs.getInt("cliente_id"));
-                Veiculo veiculo = new VeiculoDAO().findById(rs.getInt("veiculo_id"));
-                Funcionario funcionario = new FuncionarioDAO().findById(rs.getInt("funcionario_id"));
-                Servico servico = new ServicoDAO().findById(rs.getInt("servico_id"));
+                try {
+                    int agendamentoId = rs.getInt("id");
+                    Cliente cliente = null;
+                    Veiculo veiculo = null;
+                    Funcionario funcionario = null;
+                    Servico servico = null;
+                    
+                    try {
+                        int clienteId = rs.getInt("cliente_id");
+                        if (!rs.wasNull()) {
+                            cliente = new ClienteDAO().findById(clienteId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar cliente para agendamento ID " + agendamentoId + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int veiculoId = rs.getInt("veiculo_id");
+                        if (!rs.wasNull()) {
+                            veiculo = new VeiculoDAO().findById(veiculoId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar veículo para agendamento ID " + agendamentoId + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int funcionarioId = rs.getInt("funcionario_id");
+                        if (!rs.wasNull()) {
+                            funcionario = new FuncionarioDAO().findById(funcionarioId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar funcionário para agendamento ID " + agendamentoId + ": " + e.getMessage());
+                    }
+                    
+                    try {
+                        int servicoId = rs.getInt("servico_id");
+                        if (!rs.wasNull()) {
+                            servico = new ServicoDAO().findById(servicoId);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erro ao buscar serviço para agendamento ID " + agendamentoId + ": " + e.getMessage());
+                    }
 
-                LocalDateTime dt = rs.getTimestamp("dataHora").toLocalDateTime();
+                    LocalDateTime dt = rs.getTimestamp("dataHora").toLocalDateTime();
 
-                Agendamento a = new Agendamento(
-                    rs.getInt("id"),
-                    dt,
-                    rs.getString("status"),
-                    cliente,
-                    veiculo,
-                    funcionario,
-                    servico
-                );
-                lista.add(a);
+                    Agendamento a = new Agendamento(
+                        agendamentoId,
+                        dt,
+                        rs.getString("status"),
+                        cliente,
+                        veiculo,
+                        funcionario,
+                        servico
+                    );
+                    lista.add(a);
+                } catch (Exception e) {
+                    System.err.println("Erro ao carregar agendamento ID " + rs.getInt("id") + ": " + e.getMessage());
+                    e.printStackTrace();
+                    // Continua para o próximo registro mesmo se houver erro
+                }
             }
         }
         return lista;

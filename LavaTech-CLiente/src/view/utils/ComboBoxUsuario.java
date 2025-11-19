@@ -51,7 +51,7 @@ public class ComboBoxUsuario {
         }
         
         for(Usuario c: lista) {
-            ComboBoxUsuario cmb = new ComboBoxUsuario(c.getCodUsuario(),c.getNome());
+            ComboBoxUsuario cmb = new ComboBoxUsuario(c.getId(),c.getNome());
             vlista.add(cmb);
             if(cmb.getKey() == SelCOdigo) {
                 selecionarCodigo = x;

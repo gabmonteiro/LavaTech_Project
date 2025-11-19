@@ -177,6 +177,10 @@ public class ConexaoController {
     public ArrayList<Agendamento> listarAgendamentos() {
         return (ArrayList<Agendamento>) requisitarLista("listarAgendamentos");
     }
+    
+    public boolean concluirAgendamento(int id) {
+        return enviarObjeto("concluirAgendamento", id);
+    }
 
     // ==================================================
     // MÉTODOS AUXILIARES PADRONIZADOS
