@@ -12,6 +12,10 @@ public class Principal {
         // linhas de teste para a conexao com o banco
         if (Conector.getConnection() != null){
             System.out.println("Conexão com o banco de dados efetuada!");
+        } else {
+            System.err.println("ERRO: Não foi possível conectar ao banco de dados!");
+            System.err.println("O servidor não será iniciado sem conexão com o banco.");
+            return;
         }
         
         // vamos utilizar estruturas de proteção do código

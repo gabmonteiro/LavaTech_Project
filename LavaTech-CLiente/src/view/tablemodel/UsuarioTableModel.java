@@ -19,7 +19,7 @@ public class UsuarioTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5; // id, nome, email, senhaHash, isAdmin
+        return 4; // id, nome, email, senhaHash, isAdmin
     }
 
     @Override
@@ -29,8 +29,7 @@ public class UsuarioTableModel extends AbstractTableModel {
             case 0: return u.getId();
             case 1: return u.getNome();
             case 2: return u.getEmail();
-            case 3: return u.getSenhaHash();
-            case 4: return u.getIsAdmin() ? "Sim" : "Não";
+            case 3: return u.getIsAdmin() ? "Sim" : "Não";
             default: return "NONE";
         }
     }
@@ -41,8 +40,7 @@ public class UsuarioTableModel extends AbstractTableModel {
             case 0: return "ID";
             case 1: return "Nome";
             case 2: return "E-mail";
-            case 3: return "Senha Hash";
-            case 4: return "Administrador";
+            case 3: return "Administrador";
             default: return "NONE";
         }
     }

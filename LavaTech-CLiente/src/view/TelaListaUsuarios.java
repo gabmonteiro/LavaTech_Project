@@ -4,18 +4,39 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelDominio.Usuario;
 import view.tablemodel.UsuarioTableModel;
+import view.utils.UIStyle;
 
 public class TelaListaUsuarios extends javax.swing.JFrame {
+    
+    private Usuario userLogado;
 
-    public TelaListaUsuarios() {
+    public TelaListaUsuarios(Usuario usrLogado) {
         initComponents();
+        applyStyles();
         atualizaTabela();
+        this.userLogado = usrLogado;
+        setTitle("LavaTech - Usuários");
+    }
+    
+    private void applyStyles() {
+        UIStyle.setFrameBackground(this);
+        UIStyle.setPanelBackground(jPanel1);
+        UIStyle.styleSecondaryButton(jBtnVoltar1);
+        UIStyle.styleSecondaryButton(jBtnAtualizar);
+        UIStyle.stylePrimaryButton(jBtnAdicionar2);
+        UIStyle.stylePrimaryButton(jBtnEditar);
+        UIStyle.styleDangerButton(jBtnExcluir);
+        UIStyle.styleTable(jTableUsuarios);
+        
+        jLblTitulo.setFont(UIStyle.FONT_SUBTITLE);
+        jLblTitulo.setForeground(UIStyle.TEXT_PRIMARY);
     }
     
     public void atualizaTabela() {
         ArrayList<Usuario> lista = Principal.ccont.listarUsuarios();
         UsuarioTableModel userTableModel = new UsuarioTableModel(lista);
         jTableUsuarios.setModel(userTableModel);
+        UIStyle.styleTable(jTableUsuarios);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +53,12 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         jBtnAdicionar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LavaTech - Usuários");
+
+        jLblTitulo = new javax.swing.JLabel();
+        jLblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLblTitulo.setText("Usuários");
+        jLblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -51,7 +78,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableUsuarios);
 
-        jBtnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
         jBtnAtualizar.setText("Atualizar");
         jBtnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +85,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +92,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +99,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/voltar.png"))); // NOI18N
         jBtnVoltar1.setText("Voltar");
         jBtnVoltar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +106,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBtnAdicionar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/adicionar.png"))); // NOI18N
         jBtnAdicionar2.setText("Adicionar");
         jBtnAdicionar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,27 +119,34 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jBtnVoltar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnAtualizar)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnAdicionar2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jBtnEditar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnVoltar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnAdicionar2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jBtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jBtnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jBtnVoltar1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jBtnAdicionar2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                    .addComponent(jBtnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAdicionar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -140,6 +169,10 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         );
 
         pack();
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setSize(new java.awt.Dimension(1000, 700));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuariosMouseClicked
@@ -155,9 +188,9 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             UsuarioTableModel model = (UsuarioTableModel) jTableUsuarios.getModel();
             Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
 
-            // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-            //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-            //telaAtUsuario.setVisible(true);
+            // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
+            TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado, this);
+            telaCriarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_jTableUsuariosMouseClicked
 
@@ -176,17 +209,17 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         // Pegando o modelo da tabela
         UsuarioTableModel model = (UsuarioTableModel) jTableUsuarios.getModel();
         Usuario usuarioSelecionado = model.getUsuario(linhaSelecionada);
-
-        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        
+        // Chamando a tela de criar com o ID (CRIAR TELA DE CREATE)
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, usuarioSelecionado, this);
+        telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         int linhaSelecionada = jTableUsuarios.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um usuario para atualizar.");
+            JOptionPane.showMessageDialog(this, "Selecione um usuario para excluir.");
             return;
         }
 
@@ -207,9 +240,9 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnVoltar1ActionPerformed
 
     private void jBtnAdicionar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionar2ActionPerformed
-        // Chamando a tela de atualização com o ID (CRIAR TELA DE CREATE)
-        //TelaAtualizarUsuario telaAtUsuario = new TelaAtualizarUsuario(usuarioSelecionado, this);
-        //telaAtUsuario.setVisible(true);
+        // Chamando a tela de criar
+        TelaCriarUsuario telaCriarUsuario = new TelaCriarUsuario(userLogado, this);
+        telaCriarUsuario.setVisible(true);
     }//GEN-LAST:event_jBtnAdicionar2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,6 +251,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnVoltar1;
+    private javax.swing.JLabel jLblTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuarios;

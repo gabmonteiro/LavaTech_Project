@@ -89,6 +89,10 @@ public class ConexaoController {
     public ArrayList<Veiculo> listarVeiculos() {
         return (ArrayList<Veiculo>) requisitarLista("listarVeiculos");
     }
+    
+    public ArrayList<Veiculo> listarVeiculosPorCliente(int id) {
+        return (ArrayList<Veiculo>) requisitarObjeto("listarVeiculosPorCliente", id);
+    }
 
     // ---------- FUNCIONARIO ----------
     public boolean inserirFuncionario(Funcionario f) {
@@ -173,6 +177,10 @@ public class ConexaoController {
     public ArrayList<Agendamento> listarAgendamentos() {
         return (ArrayList<Agendamento>) requisitarLista("listarAgendamentos");
     }
+    
+    public boolean concluirAgendamento(int id) {
+        return enviarObjeto("concluirAgendamento", id);
+    }
 
     // ==================================================
     // MÉTODOS AUXILIARES PADRONIZADOS
@@ -196,7 +204,8 @@ public class ConexaoController {
             out.writeObject(operacao);
             out.writeObject(parametro);
             out.flush();
-            return in.readObject();
+            Object a = in.readObject();
+            return a;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -204,17 +213,6 @@ public class ConexaoController {
     }
 
     private Object requisitarLista(String operacao) {
-        try {
-            out.writeObject(operacao);
-            out.flush();
-            return in.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-        private Object requisitarListaVeiculos(String operacao, int clienteId) {
         try {
             out.writeObject(operacao);
             out.flush();

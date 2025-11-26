@@ -90,6 +90,36 @@ public class VeiculoDAO {
         }
         return null;
     }
+    
+    public List<Veiculo> findByCliente(int id) throws SQLException {
+        String sql = "SELECT * FROM Veiculo WHERE cliente_id = ?";
+        List<Veiculo> lista = new ArrayList<>();
+        try (Connection conn = Conector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Cliente cliente = null;
+                    int clienteId = rs.getInt("cliente_id");
+                    if (!rs.wasNull()) {
+                        ClienteDAO cdao = new ClienteDAO();
+                        cliente = cdao.findById(clienteId);
+                    }
+                    Veiculo v = new Veiculo(
+                        rs.getInt("id"),
+                        rs.getString("placa"),
+                        rs.getString("marca"),
+                        rs.getString("modelo"),
+                        rs.getString("cor"),
+                        rs.getInt("ano"),
+                        cliente
+                    );
+                    lista.add(v);
+                }
+            }
+        }
+        return lista;
+    }
 
     public List<Veiculo> findAll() throws SQLException {
         String sql = "SELECT * FROM Veiculo";

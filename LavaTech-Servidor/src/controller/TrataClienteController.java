@@ -113,6 +113,10 @@ public class TrataClienteController extends Thread {
                         case "listarVeiculos":
                             out.writeObject(veiculoDAO.findAll());
                             break;
+                        case "listarVeiculosPorCliente":
+                            Integer clientId = (Integer) in.readObject();
+                            out.writeObject(veiculoDAO.findByCliente(clientId));
+                            break;
 
                         // -------- FUNCIONARIO --------
                         case "inserirFuncionario":
@@ -208,6 +212,31 @@ public class TrataClienteController extends Thread {
                             break;
                         case "listarAgendamentos":
                             out.writeObject(agendamentoDAO.findAll());
+                            break;
+                        case "concluirAgendamento":
+                            Integer agIdConcluir = (Integer) in.readObject();
+                            try {
+                                // Buscar o agendamento
+                                Agendamento agConcluir = agendamentoDAO.findById(agIdConcluir);
+                                if (agConcluir != null) {
+                                    // Apenas atualizar o status para "Concluído"
+                                    agConcluir.setStatus("Concluído");
+                                    agendamentoDAO.update(agConcluir);
+                                    System.out.println("Agendamento ID " + agIdConcluir + " marcado como concluído com sucesso.");
+                                    out.writeObject("SUCCESS");
+                                } else {
+                                    System.err.println("Agendamento ID " + agIdConcluir + " não encontrado.");
+                                    out.writeObject("ERROR: Agendamento não encontrado");
+                                }
+                            } catch (SQLException e) {
+                                System.err.println("Erro SQL ao concluir agendamento ID " + agIdConcluir + ": " + e.getMessage());
+                                e.printStackTrace();
+                                out.writeObject("ERROR: " + e.getMessage());
+                            } catch (Exception e) {
+                                System.err.println("Erro ao concluir agendamento ID " + agIdConcluir + ": " + e.getMessage());
+                                e.printStackTrace();
+                                out.writeObject("ERROR: " + e.getMessage());
+                            }
                             break;
 
                         default:
