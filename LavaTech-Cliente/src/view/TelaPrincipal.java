@@ -46,10 +46,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jBtnClientes = new javax.swing.JButton();
         jBtnSair = new javax.swing.JButton();
         jBtnUsuarios = new javax.swing.JButton();
+        jLblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LavaTech - Menu Principal");
         setResizable(false);
+        
+        // Carregar logo pequena no canto superior direito
+        javax.swing.JLabel logoLabel = view.utils.LogoHelper.createLogoLabel(80, 70);
+        if (logoLabel != null) {
+            jLblLogo = logoLabel;
+        }
 
         jPanelCard.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -156,12 +163,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLblLogo)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLblLogo)))
                 .addGap(50, 50, 50))
         );
 
@@ -208,6 +224,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBtnSair;
     private javax.swing.JButton jBtnServicos;
     private javax.swing.JButton jBtnUsuarios;
+    private javax.swing.JLabel jLblLogo;
     private javax.swing.JLabel jLblSubtitulo;
     private javax.swing.JLabel jLblTitulo;
     private javax.swing.JPanel jPanelCard;

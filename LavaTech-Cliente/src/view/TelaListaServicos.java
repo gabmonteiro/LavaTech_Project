@@ -49,9 +49,16 @@ public class TelaListaServicos extends javax.swing.JFrame {
         jBtnAdicionar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableServicos = new javax.swing.JTable();
+        jLblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LavaTech - Serviços");
+        
+        // Carregar logo pequena no canto superior direito
+        javax.swing.JLabel logoLabel = view.utils.LogoHelper.createLogoLabel(80, 70);
+        if (logoLabel != null) {
+            jLblLogo = logoLabel;
+        }
 
         jLblTitulo = new javax.swing.JLabel();
         jLblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -156,12 +163,20 @@ public class TelaListaServicos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLblLogo)
+                .addContainerGap())
             .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLblLogo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
         );
@@ -258,6 +273,7 @@ public class TelaListaServicos extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnVoltar;
+    private javax.swing.JLabel jLblLogo;
     private javax.swing.JLabel jLblTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;

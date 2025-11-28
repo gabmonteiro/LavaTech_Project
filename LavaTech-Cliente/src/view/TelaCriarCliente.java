@@ -14,6 +14,12 @@ public class TelaCriarCliente extends javax.swing.JFrame {
         applyStyles();
         this.telaLista = telaLista;
         setTitle("LavaTech - Novo Cliente");
+        
+        // Carregar logo pequena no canto superior direito
+        javax.swing.JLabel logoLabel = view.utils.LogoHelper.createLogoLabel(80, 70);
+        if (logoLabel != null) {
+            jLblLogo = logoLabel;
+        }
     }
     
     public TelaCriarCliente(Cliente cliente, TelaListaClientes telaLista) {
@@ -55,6 +61,7 @@ public class TelaCriarCliente extends javax.swing.JFrame {
 
         jPanelCard = new javax.swing.JPanel();
         jLblTitulo = new javax.swing.JLabel();
+        jLblLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nomeField = new javax.swing.JTextField();
@@ -145,12 +152,21 @@ public class TelaCriarCliente extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLblLogo)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLblLogo)))
                 .addGap(50, 50, 50))
         );
 
@@ -189,6 +205,7 @@ public class TelaCriarCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBtnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLblLogo;
     private javax.swing.JLabel jLblTitulo;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JTextField nomeField;

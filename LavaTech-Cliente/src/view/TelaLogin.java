@@ -49,6 +49,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelCard = new javax.swing.JPanel();
+        jLblLogo = new javax.swing.JLabel();
         jLblTitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +64,20 @@ public class TelaLogin extends javax.swing.JFrame {
         setResizable(false);
 
         jPanelCard.setBackground(new java.awt.Color(255, 255, 255));
+
+        // Carregar logo
+        try {
+            java.net.URL logoUrl = getClass().getResource("/view/imagens/logo_lavatech.png");
+            if (logoUrl != null) {
+                javax.swing.ImageIcon logoIcon = new javax.swing.ImageIcon(logoUrl);
+                // Redimensionar para 150x130 (proporção similar ao mobile)
+                java.awt.Image img = logoIcon.getImage().getScaledInstance(150, 130, java.awt.Image.SCALE_SMOOTH);
+                jLblLogo.setIcon(new javax.swing.ImageIcon(img));
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar logo: " + e.getMessage());
+        }
+        jLblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLblTitulo.setText("LavaTech");
@@ -103,6 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
             .addGroup(jPanelCardLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanelCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLblAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelCardLayout.createSequentialGroup()
@@ -122,7 +138,9 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanelCardLayout.setVerticalGroup(
             jPanelCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCardLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
+                .addComponent(jLblLogo)
+                .addGap(10, 10, 10)
                 .addComponent(jLblTitulo)
                 .addGap(10, 10, 10)
                 .addComponent(jLblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,6 +234,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLblAviso;
+    private javax.swing.JLabel jLblLogo;
     private javax.swing.JLabel jLblTitulo;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JTextField jTextEmail;
