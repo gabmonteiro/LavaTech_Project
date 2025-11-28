@@ -17,7 +17,7 @@ import modelDominio.Usuario;
 public class LoginActivityApp extends AppLavaTechActivity {
 
     Button buttonLogin;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextServerIP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class LoginActivityApp extends AppLavaTechActivity {
         buttonLogin = findViewById(R.id.buttonLogin);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextServerIP = findViewById(R.id.editTextServerIP);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,9 +40,10 @@ public class LoginActivityApp extends AppLavaTechActivity {
     private void tentarLogin() {
         String email = editTextEmail.getText().toString().trim();
         String senha = editTextPassword.getText().toString();
+        String serverIP = editTextServerIP.getText().toString().trim();
 
-        if (email.isEmpty() || senha.isEmpty()) {
-            Toast.makeText(this, "Informe e-mail e senha.", Toast.LENGTH_SHORT).show();
+        if (email.isEmpty() || senha.isEmpty() || serverIP.isEmpty()) {
+            Toast.makeText(this, "Informe e-mail, senha e IP do servidor.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -53,7 +55,7 @@ public class LoginActivityApp extends AppLavaTechActivity {
 
         ConexaoController conexao = ConexaoController.getInstance();
         // Primeiro garante conexão com o servidor
-        conexao.executar(() -> {
+        conexao.executar(serverIP, () -> {
             Log.d("LoginActivityApp", "Conexão estabelecida! Iniciando processo de login...");
             // Executar o login de forma assíncrona em uma nova thread para evitar deadlock
             new Thread(() -> {

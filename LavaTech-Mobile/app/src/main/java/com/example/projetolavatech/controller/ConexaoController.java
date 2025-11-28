@@ -35,6 +35,9 @@ public class ConexaoController {
 
     // Estado da conexão
     private volatile EstadoConexao estado = EstadoConexao.DESCONECTADO;
+    
+    // IP do servidor armazenado após primeira conexão bem-sucedida
+    private String serverIPArmazenado = null;
 
     private ConexaoController() {}
 
@@ -55,8 +58,28 @@ public class ConexaoController {
 
     /**
      * Garante que exista uma conexão ativa com o servidor antes de executar onSuccess.
+     * Usa o IP armazenado de uma conexão anterior, ou retorna erro se não houver IP armazenado.
+     * @param onSuccess Callback executado quando a conexão for estabelecida
+     * @param onError Callback executado em caso de erro na conexão
      */
     public void executar(Runnable onSuccess, Runnable onError) {
+        if (serverIPArmazenado == null || serverIPArmazenado.isEmpty()) {
+            Log.e("ConexaoController", "Tentativa de conexão sem IP do servidor. Use executar(serverIP, ...) primeiro.");
+            if (onError != null) {
+                onError.run();
+            }
+            return;
+        }
+        executar(serverIPArmazenado, onSuccess, onError);
+    }
+
+    /**
+     * Garante que exista uma conexão ativa com o servidor antes de executar onSuccess.
+     * @param serverIP IP do servidor (ex: "192.168.1.100" ou "10.0.2.2" para emulador)
+     * @param onSuccess Callback executado quando a conexão for estabelecida
+     * @param onError Callback executado em caso de erro na conexão
+     */
+    public void executar(String serverIP, Runnable onSuccess, Runnable onError) {
         // Se já estiver conectado, executa direto na thread do executor para garantir sincronização
         if (estado == EstadoConexao.CONECTADO) {
             if (onSuccess != null) {
@@ -76,12 +99,12 @@ public class ConexaoController {
             try {
                 // IMPORTANTE: ajuste o host para o IP da máquina que roda o servidor
                 // Em emulador Android Studio use 10.0.2.2, em dispositivo físico use o IP da rede (ex: 192.168.x.x)
-                Log.d("ConexaoController", "Tentando conectar ao servidor 192.168.1.22:12345...");
+                Log.d("ConexaoController", "Tentando conectar ao servidor " + serverIP + ":12345...");
                 
                 // Fechar conexão anterior se existir
                 desconectarConexaoAnterior();
                 
-                cliente = new Socket("192.168.1.22", 12345);
+                cliente = new Socket(serverIP, 12345);
                 Log.d("ConexaoController", "Socket criado com sucesso!");
                 
                 // IMPORTANTE: O servidor cria ObjectOutputStream primeiro (linha 29 do TrataClienteController)
@@ -95,7 +118,10 @@ public class ConexaoController {
                 Log.d("ConexaoController", "ObjectOutputStream criado! Conexão estabelecida.");
 
                 estado = EstadoConexao.CONECTADO;
-                Log.d("ConexaoController", "Estado alterado para CONECTADO. Executando callback onSuccess...");
+                // Armazenar o IP para uso em conexões futuras
+                serverIPArmazenado = serverIP;
+                Log.d("ConexaoController", "Estado alterado para CONECTADO. IP armazenado: " + serverIP);
+                Log.d("ConexaoController", "Executando callback onSuccess...");
                 
                 // Executar onSuccess na thread do executor para garantir sincronização
                 if (onSuccess != null) {
@@ -131,6 +157,7 @@ public class ConexaoController {
 
     public void desconectar() {
         estado = EstadoConexao.DESCONECTADO;
+        // Não limpar o serverIPArmazenado para permitir reconexão automática
         executor.execute(() -> {
             desconectarConexaoAnterior();
         });
