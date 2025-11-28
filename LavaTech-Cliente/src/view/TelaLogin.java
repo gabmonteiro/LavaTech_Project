@@ -88,8 +88,18 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setText("Senha:");
 
         jTextEmail.setPreferredSize(new java.awt.Dimension(300, 40));
+        jTextEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEntrarActionPerformed(evt);
+            }
+        });
 
         jTextSenha.setPreferredSize(new java.awt.Dimension(300, 40));
+        jTextSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEntrarActionPerformed(evt);
+            }
+        });
 
         jBtnEntrar.setText("Entrar");
         jBtnEntrar.setPreferredSize(new java.awt.Dimension(140, 45));

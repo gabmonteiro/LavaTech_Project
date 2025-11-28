@@ -71,6 +71,7 @@ public class TelaCriarFuncionario extends javax.swing.JFrame {
 
         jPanelCard = new javax.swing.JPanel();
         jLblTitulo = new javax.swing.JLabel();
+        jLblLogo = new javax.swing.JLabel();
         jBtnVoltar = new javax.swing.JButton();
         jBtnAdicionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();

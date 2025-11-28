@@ -97,6 +97,7 @@ public class TelaCriarUsuario extends javax.swing.JFrame {
 
         jPanelCard = new javax.swing.JPanel();
         jLblTitulo = new javax.swing.JLabel();
+        jLblLogo = new javax.swing.JLabel();
         jBtnVoltar1 = new javax.swing.JButton();
         jBtnAdicionar2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
