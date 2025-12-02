@@ -93,7 +93,7 @@ if [ $? -eq 0 ]; then
     echo "O app LavaTech foi instalado no seu dispositivo."
     echo ""
     echo "Para iniciar o app, execute:"
-    echo "  adb shell am start -n com.example.projetolavatech/.MainActivity"
+    echo "  adb shell am start -n com.example.projetolavatech/.LoginActivityApp"
     echo ""
     echo "Ou simplesmente abra o app no seu celular!"
 else
